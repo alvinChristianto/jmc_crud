@@ -395,6 +395,12 @@
             margin-left: auto;
             margin-right: auto
         }
+        
+        .my-4 {
+            margin-top: 1rem;
+            margin-bottom: 1rem
+        }
+
 
         .mx-6 {
             margin-left: 1.5rem;
@@ -533,6 +539,11 @@
             background-color: rgb(255 255 255 / var(--tw-bg-opacity))
         }
 
+
+		.bg-green-700 {
+			--tw-bg-opacity: 1;
+			background-color: rgb(21 128 61 / var(--tw-bg-opacity))
+		}
         .bg-red-50 {
             --tw-bg-opacity: 1;
             background-color: rgb(254 242 242 / var(--tw-bg-opacity))
@@ -838,7 +849,7 @@
 
 
             <div class="mt-16">
-                <h2 class="text-bold text-slate-100">Create Regency Data </h2>
+                <h2 class="text-bold text-gray-500 text-xl my-4">Create Regency Data </h2>
                 <div>
                     @if($errors->any())
                     <ul>
@@ -852,8 +863,8 @@
                 <form method="post" action="{{route('regency.store')}} ">
                     @csrf
                     @method('post')
-                    <div class="m-3">
-                        <label for="cars">Choose province</label>
+                    <div class="my-4">
+                        <label for="province"  class="text-bold text-gray-500">Choose province</label>
 
                         <select name="province_id">
                             @foreach($provinces as $province)
@@ -861,17 +872,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="m-3">
-                        <label for="" class="text-bold text-slate-100">Regency name </label>
-                        <input type="text" name="regency_name" placeholder="name of regency" />
+                    <div class="my-4">
+                        <label for="" class="text-bold text-gray-500">Regency name </label>
+                        <input type="text" name="regency_name" placeholder="name of regency" class="text-bold text-gray-500"/>
                     </div>
-                    <div class="m-3">
-                        <label for="" class="text-bold text-slate-100">total population</label>
+                    <div class="my-4">
+                        <label for="" class="text-bold text-gray-500">total population</label>
                         <input type="text" name="total_population" placeholder="population" />
                     </div>
 
                     <div>
-                        <input type="submit" value="submit" class="bg-white rounded-lg " />
+                        <input type="submit" value="submit" class="bg-green-700 rounded-lg "/>
                     </div>
                 </form>
             </div>

@@ -396,14 +396,14 @@
             margin-right: auto
         }
 
-        .mx-6 {
-            margin-left: 1.5rem;
-            margin-right: 1.5rem
-        }
-
         .my-4 {
             margin-top: 1rem;
             margin-bottom: 1rem
+        }
+
+        .mx-6 {
+            margin-left: 1.5rem;
+            margin-right: 1.5rem
         }
 
         .ml-4 {
@@ -438,10 +438,6 @@
             display: inline-flex
         }
 
-        .border-separate {
-            border-collapse: separate;
-        }
-
         .grid {
             display: grid
         }
@@ -470,9 +466,6 @@
             width: auto
         }
 
-        .w-32 {
-            width: 8rem
-        }
         .w-16 {
             width: 4rem
         }
@@ -526,9 +519,7 @@
         .self-center {
             align-self: center
         }
-        .rounded-md {
-            border-radius: 0.1rem
-        }
+
         .rounded-lg {
             border-radius: 0.5rem
         }
@@ -550,16 +541,6 @@
         .bg-red-50 {
             --tw-bg-opacity: 1;
             background-color: rgb(254 242 242 / var(--tw-bg-opacity))
-        }
-        
-        .bg-red-500 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(239 68 68 / var(--tw-bg-opacity))
-        }
-
-        .bg-green-700 {
-            --tw-bg-opacity: 1;
-            background-color: rgb(21 128 61 / var(--tw-bg-opacity))
         }
 
         .bg-dots-darker {
@@ -589,9 +570,6 @@
             stroke: #9ca3af
         }
 
-        .p-2 {
-            padding: 0.5rem
-        }
         .p-6 {
             padding: 1.5rem
         }
@@ -601,10 +579,6 @@
             padding-right: 1.5rem
         }
 
-        .uppercase {
-            text-transform: uppercase
-        } 
-        
         .text-center {
             text-align: center
         }
@@ -869,70 +843,29 @@
 
 
             <div class="mt-16">
-                <div>
-                    <ul>
-                        <li class="rounded-md bg-white w-32 p-2 text-sm uppercase my-4"><a href="{{route('province.create')}}">add province</a></li>
-                        <li class="rounded-md bg-white w-32 p-2 text-sm uppercase my-4"><a href="{{route('regency.create')}}">add regency</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="m-4">
-                        <div>
-                            @if($errors->any())
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                            @endif
-                        </div>
-                        <form method="post" action="{{route('province.search')}}">
-                            @csrf
-                            @method('get')
-                            <label for="" class="text-bold text-gray-500">search by province</label><br/>
-                            <input type="text" name="province_name" placeholder="enter province" />
-                            <input type="submit" value="search" class="uppercase text-md font-semibold bg-green-700">
-                        </form>
-
-                    </div>
-                </div>
-                <div class=" my-4 bg-green-700  ">
-                    @if(session()->has('success'))
-                    <div>
-                        {{session('success')}}
-                    </div>
-                    @endif
-                </div>
-                <div class="mt-6">
-                    <table border="4" class=" border-separate text-gray-500" style="border-width: 2px;">
+                <h3 class="text-bold text-gray-500 text-xl my-4">List regency : {{$province_name->province_name}}</h3>
+                <div class="">
+                    <table border="1" class=" text-gray-500">
                         <tr>
-                            <th>no</th>
-                            <th>province name</th>
+                            <th>id</th>
+                            <th>regency name</th>
                             <th>total population</th>
-                            <th>edit</th>
-                            <th>delete</th>
                         </tr>
-                        @foreach($provinces as $province)
+                        
+                        @foreach($regencyofProvince as $regencyofProvince)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td><a href="{{route('regency.listRegencies', ['province' => $province])}}">{{$province->province_name}}</a></td>
-                            <td>{{$sum_population[($loop->iteration)-1]}}</td>
-                            <td>
-                                <a href="{{route('province.edit', ['province' => $province])}}" class="bg-white text-gray-900">edit</a>
-                            </td>
-                            <td>
-                                <form method="post" action="{{route('province.destroy', ['province' => $province])}}">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="delete" class="bg-red-500 text-gray-900">
-                                </form>
-                            </td>
+                            <td>{{$regencyofProvince->regency_name}}</a></td>
+                            <td>{{$regencyofProvince->total_population}}</a></td>
+                           
                         </tr>
 
                         @endforeach
                     </table>
+                    <h3 class="my-4 text-bold text-gray-500 text-xl">total Population: {{$sum_population}}</h3>
                 </div>
             </div>
+            <h3 class="bg-my-4 bg-gray-100 text-bold text-gray-500 text-xl w-16"><a href="/">< Back</a></h3>
 
 
         </div>

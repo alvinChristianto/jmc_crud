@@ -523,6 +523,10 @@
             border-radius: 9999px
         }
 
+		.bg-green-700 {
+			--tw-bg-opacity: 1;
+			background-color: rgb(21 128 61 / var(--tw-bg-opacity))
+		}
         .bg-gray-100 {
             --tw-bg-opacity: 1;
             background-color: rgb(243 244 246 / var(--tw-bg-opacity))
@@ -838,7 +842,7 @@
 
 
             <div class="mt-16">
-                <h2 class="text-bold text-slate-100">Edit Province Data </h2>
+                <h2 class="text-bold text-gray-500">Edit Province Data </h2>
                 <div>
                     @if($errors->any())
                     <ul>
@@ -854,12 +858,12 @@
                     @csrf
                     @method('put')
                     <div class="m-3">
-                        <label for="" class="text-bold text-slate-100">province name </label>
+                        <label for="" class="text-bold text-gray-500">province name </label>
                         <input type="text" name="province_name" placeholder="name of province" value="{{$province->province_name}}"/>
                     </div>
 
                     <div>
-                        <input type="submit" value="Update" class="bg-white rounded-lg " />
+                        <input type="submit" value="Update" class="bg-green-700 rounded-lg" />
                     </div>
                 </form>
             </div>

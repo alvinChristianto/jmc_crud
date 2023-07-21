@@ -4,13 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Province;
+use App\Models\Regency;
 
 class ProvinceController extends Controller
 {
 	public function index()
 	{
+		$arrOfSum = array();
 		$provinces = Province::all();
-		return view('welcome', ['provinces' => $provinces]);
+
+		// dd($provinces[0]->id);
+		foreach($provinces as $x => $val) {
+
+			//dd($val);
+			$regencyofProvince = Regency::where('province_id', $val->id)->get();
+			$sumTotalPopulation = $regencyofProvince->sum('total_population');
+			
+			array_push($arrOfSum,$sumTotalPopulation);
+		}
+		
+		return view('welcome', ['provinces' => $provinces, 'sum_population' => $arrOfSum]);
 	}
 
 	public function create()
@@ -50,5 +63,24 @@ class ProvinceController extends Controller
 		$province->delete();
 		return redirect(route('welcome'))->with('success','data successfully deleted');
 
+	}
+
+	public function searchProvince(Request $request) {
+		$arrOfSum = array();
+		$data = $request->validate([
+			'province_name' => 'required'
+		]);
+		$province = Province::where('province_name',$request->province_name)->get();
+
+		foreach($province as $x => $val) {
+
+			//dd($val);
+			$regencyofProvince = Regency::where('province_id', $val->id)->get();
+			$sumTotalPopulation = $regencyofProvince->sum('total_population');
+			
+			array_push($arrOfSum,$sumTotalPopulation);
+		}
+		
+		return view('welcome', ['provinces' => $province,'sum_population' => $arrOfSum]);
 	}
 }

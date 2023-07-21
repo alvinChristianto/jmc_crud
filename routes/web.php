@@ -24,3 +24,6 @@ Route::delete('/province/{province}/destroy', [ProvinceController::class, 'destr
 
 Route::get('/regency/create', [RegencyController::class, 'create'])->name('regency.create');
 Route::post('/regency', [RegencyController::class, 'store'])->name('regency.store');
+
+Route::get('/{province}/regencies', [RegencyController::class, 'listRegencies'])->name('regency.listRegencies');
+Route::get('/search-by-province', [ProvinceController::class, 'searchProvince'])->name('province.search');

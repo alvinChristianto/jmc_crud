@@ -532,6 +532,11 @@
 			background-color: rgb(243 244 246 / var(--tw-bg-opacity))
 		}
 
+		.bg-green-700 {
+			--tw-bg-opacity: 1;
+			background-color: rgb(21 128 61 / var(--tw-bg-opacity))
+		}
+
 		.bg-white {
 			--tw-bg-opacity: 1;
 			background-color: rgb(255 255 255 / var(--tw-bg-opacity))
@@ -842,7 +847,7 @@
 
 
 			<div class="mt-16">
-				<h2 class="text-bold text-slate-100">Create Province Data </h2>
+				<h2 class="text-bold  text-gray-500">Create Province Data </h2>
 				<div>
 					@if($errors->any())
 					<ul>
@@ -863,7 +868,7 @@
 					</div>
 
 					<div>
-						<input type="submit" value="submit" class="bg-white rounded-lg " />
+						<input type="submit" value="submit" class="bg-green-700 rounded-lg " />
 					</div>
 				</form>
 			</div>
