@@ -838,46 +838,42 @@
 
 
             <div class="mt-16">
+                <h2 class="text-bold text-slate-100">Create Regency Data </h2>
                 <div>
+                    @if($errors->any())
                     <ul>
-                        <li><a href="{{route('province.create')}}">add province</a></li>
-                        <li><a href="{{route('regency.create')}}">add regency</a></li>
+                        @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
                     </ul>
-                </div>
-                <div>
-                    @if(session()->has('success'))
-                    <div>
-                        {{session('success')}}
-                    </div>
                     @endif
                 </div>
-                <div class="">
-                    <table border="1">
-                        <tr>
-                            <th>id</th>
-                            <th>province name</th>
-                            <th>edit</th>
-                            <th>delete</th>
-                        </tr>
-                        @foreach($provinces as $province)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$province->province_name}}</td>
-                            <td>
-                                <a href="{{route('province.edit', ['province' => $province])}}">edit</a>
-                            </td>
-                            <td>
-                                <form method="post" action="{{route('province.destroy', ['province' => $province])}}">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" value="delete">
-                                </form>
-                            </td>
-                        </tr>
 
-                        @endforeach
-                    </table>
-                </div>
+                <form method="post" action="{{route('regency.store')}} ">
+                    @csrf
+                    @method('post')
+                    <div class="m-3">
+                        <label for="cars">Choose province</label>
+
+                        <select name="province_id">
+                            @foreach($provinces as $province)
+                            <option value="{{$province->id}}">{{$province->province_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="m-3">
+                        <label for="" class="text-bold text-slate-100">Regency name </label>
+                        <input type="text" name="regency_name" placeholder="name of regency" />
+                    </div>
+                    <div class="m-3">
+                        <label for="" class="text-bold text-slate-100">total population</label>
+                        <input type="text" name="total_population" placeholder="population" />
+                    </div>
+
+                    <div>
+                        <input type="submit" value="submit" class="bg-white rounded-lg " />
+                    </div>
+                </form>
             </div>
 
 

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('regencies', function (Blueprint $table) {
             $table->id();
+            //foreign key provinces
+            $table->unsignedBigInteger('province_id');
+            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->string('regency_name', 100);
+            $table->integer('total_population');
             $table->timestamps();
         });
     }
